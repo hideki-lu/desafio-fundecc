@@ -23,7 +23,7 @@ Para essa implementação será utilizadas as ferramentas:
 
 ## Roadmap:
 - [x] preparar ambiente Gradle.
-- [] definir ecossistema de ferramentas.
-- [] implementação do controle de dados e regra de negócio.
-- [] implementação da visão.
-- [] implementação da persistência dos dados.
+- [ ] definir ecossistema de ferramentas.
+- [ ] implementação do controle de dados e regra de negócio.
+- [ ] implementação da visão.
+- [ ] implementação da persistência dos dados.
