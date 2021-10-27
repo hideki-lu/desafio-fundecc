@@ -1,6 +1,6 @@
 # Aplicação desafio proposto de gerencia de usuário.
 ## Como executara a aplicação:
-** Tenha o Gradle instalado **
+**Tenha o Gradle instalado**
 Caso esteja em ambiente Linux utilize os seguintes comandos dentro da pasta do projeto:
 ```
 gradle build
