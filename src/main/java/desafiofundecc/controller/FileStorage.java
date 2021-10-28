@@ -1,14 +1,18 @@
 package desafiofundecc.controller;
 
-import java.io.FileOutputStream;
+import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-public class FileStorage<T> implements StorageHandler<T> {
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
+
+public class FileStorage<T extends CsvStringable> implements StorageHandler<T> {
     private String path;
     private List<T> collection;
     public FileStorage(String path) {
@@ -17,22 +21,38 @@ public class FileStorage<T> implements StorageHandler<T> {
     }
 
     @Override
-    public Optional<T> get() {
-        
-        return null;
+    public void read() throws IOException {
+        ObjectInputStream inputStream = null;
+        try {
+            var csvStream = new CSVReader(new FileReader(path));
+            String[] line;
+            while ((line = csvStream.readNext()) != null) {
+                System.out.println("Country id= " + line[0] + ", code= " + line[1] + " , name=" + line[2]);
+            }
+            
+        } catch (IOException | CsvValidationException exception) {
+            throw new IOException("Error while reading the data.");
+        } finally {
+            if (inputStream != null) {
+                try { inputStream.close(); 
+                } catch(IOException exception) 
+                    { throw new IOException("Error while closing file.");}
+            }
+        }
     }
 
     @Override
-    public void save(T type) throws IOException {
-        ObjectOutputStream outputStream = null;
+    public void save() throws IOException {
+        BufferedWriter writer = null;
         try {
-            outputStream = new ObjectOutputStream(new FileOutputStream(path));
-            outputStream.writeObject(type);
+            writer = Files.newBufferedWriter(Path.of(path));
+            for (var data: collection)
+                writer.write(data.toCsvString());
         } catch(IOException exception) {
-            throw (new IOException("Fail while saving the data: " + type.toString()));
+            throw (new IOException("Fail while saving the data."));
         } finally {
-            if (outputStream != null) {
-                try { outputStream.close(); }
+            if (writer != null) {
+                try { writer.close(); }
                 catch(IOException exception) 
                     { throw new IOException("Fail while closing file: " + path); }
             }

@@ -2,12 +2,23 @@ package desafiofundecc.model;
 
 import java.util.Date;
 
-public final class Usuario extends Pessoa {
+import desafiofundecc.controller.CsvStringable;
+
+public final class Usuario extends Pessoa implements CsvStringable {
     private Cargo cargo;
     
     public Usuario(String nome, Date dataNascimento, long cpf, Sexo sexo, Cargo cargo) {
         super (nome, dataNascimento, sexo, cpf);
         this.cargo = cargo;
+    }
+
+    @Override
+    public String toCsvString() {
+        return getNome() + "," + 
+               getDataNascimento().toString() + "," +
+               getCpf() + "," +
+               sexoToChar() + "," +
+               cargo.getName() + "\n";
     }
     
     @Override
