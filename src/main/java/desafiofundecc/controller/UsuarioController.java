@@ -12,6 +12,7 @@ public final class UsuarioController {
 
     private UsuarioController() {
         usuarios = new ArrayList<Usuario>();
+        storage = new CsvFileStorage<Usuario>("./usuarios.csv");
     }
 
     public UsuarioController getInstance() {

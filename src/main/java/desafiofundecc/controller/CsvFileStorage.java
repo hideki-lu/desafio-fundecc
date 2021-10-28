@@ -12,22 +12,24 @@ import java.util.List;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 
-public class FileStorage<T extends CsvStringable> implements StorageHandler<T> {
+public class CsvFileStorage<T extends CsvStringable<T>> implements StorageHandler<T> {
     private String path;
     private List<T> collection;
-    public FileStorage(String path) {
+    private List<String[]> csvCollection;
+    public CsvFileStorage(String path) {
         this.path = path;
         collection = new ArrayList<T>();
+        csvCollection = new ArrayList<String[]>();
     }
 
     @Override
     public void read() throws IOException {
         ObjectInputStream inputStream = null;
         try {
-            var csvStream = new CSVReader(new FileReader(path));
-            String[] line;
-            while ((line = csvStream.readNext()) != null) {
-                System.out.println("Country id= " + line[0] + ", code= " + line[1] + " , name=" + line[2]);
+            var reader = new CSVReader(new FileReader(path));
+            String[] record = null;
+            while ((record = reader.readNext()) != null) {
+                csvCollection.add(record);
             }
             
         } catch (IOException | CsvValidationException exception) {

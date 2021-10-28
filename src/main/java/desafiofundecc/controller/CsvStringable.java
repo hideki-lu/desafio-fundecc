@@ -1,4 +1,4 @@
 package desafiofundecc.controller;
-public interface CsvStringable {
+public interface CsvStringable<T> {
     public String toCsvString();
 }

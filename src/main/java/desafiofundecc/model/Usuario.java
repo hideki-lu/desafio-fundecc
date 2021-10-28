@@ -1,13 +1,11 @@
 package desafiofundecc.model;
 
-import java.util.Date;
-
 import desafiofundecc.controller.CsvStringable;
 
-public final class Usuario extends Pessoa implements CsvStringable {
+public final class Usuario extends Pessoa implements CsvStringable<Usuario> {
     private Cargo cargo;
     
-    public Usuario(String nome, Date dataNascimento, long cpf, Sexo sexo, Cargo cargo) {
+    public Usuario(String nome, String dataNascimento, long cpf, Sexo sexo, Cargo cargo) {
         super (nome, dataNascimento, sexo, cpf);
         this.cargo = cargo;
     }
@@ -15,15 +13,19 @@ public final class Usuario extends Pessoa implements CsvStringable {
     @Override
     public String toCsvString() {
         return getNome() + "," + 
-               getDataNascimento().toString() + "," +
+               getDataNascimento() + "," +
                getCpf() + "," +
-               sexoToChar() + "," +
+               Sexo.sexoToChar(getSexo()) + "," +
                cargo.getName() + "\n";
     }
-    
-    @Override
-    public char sexoToChar() {
-        return super.sexoToChar();
+    public Usuario fromCVSToUser(String[] record) {
+        return new Usuario (
+            record[0],
+            record[1],
+            Long.parseLong(record[2]),
+            Sexo.charToSexo(record[3].charAt(0)),
+            new Cargo(record[4])
+        );
     }
     
     public Cargo getCargo() {
@@ -32,21 +34,21 @@ public final class Usuario extends Pessoa implements CsvStringable {
 
     @Override
     public long getCpf() {
-        return super.getCpf();
+        return getCpf();
     }
 
     @Override
-    public Date getDataNascimento() {
-        return super.getDataNascimento();
+    public String getDataNascimento() {
+        return getDataNascimento();
     }
 
     @Override
     public String getNome() {
-        return super.getNome();
+        return getNome();
     }
 
     @Override
     public Sexo getSexo() {
-        return super.getSexo();
+        return getSexo();
     }
 }
