@@ -6,4 +6,5 @@ bin/
 gradlew
 gradlew.bat
 .classpath
-/gradle
+gradle/
+bin/
