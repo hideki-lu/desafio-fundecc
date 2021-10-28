@@ -1,10 +1,10 @@
 .gradle/
-build/
-bin/
 .vscode/
 .settings/
+.classpath
+.project
+gradle/
+build/
+bin/
 gradlew
 gradlew.bat
-.classpath
-gradle/
-bin/
