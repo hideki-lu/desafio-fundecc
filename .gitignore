@@ -1,2 +1,8 @@
 .gradle/
 build/
+bin/
+.vscode/
+.settings/
+gradlew
+gradlew.bat
+.classpath
