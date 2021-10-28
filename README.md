@@ -1,4 +1,8 @@
 # Aplicação desafio proposto de gerencia de usuário.
+## Pré-requisitos para execução o projeto:
+* Gradle
+* Java 11 (versão 11 da linguagem podendo ser do Oracle JDK ou OpenJDK)
+
 ## Como executara a aplicação:
 **Tenha o Gradle instalado**
 Caso esteja em ambiente Linux utilize os seguintes comandos dentro da pasta do projeto:
@@ -18,6 +22,7 @@ gradle run
 ## Especificações técnicas:
 Para essa implementação será utilizadas as ferramentas:
 * Gradle
+* OpenCSV
 
 ## Roadmap:
 - [x] preparar ambiente Gradle.
