@@ -18,12 +18,10 @@ gradle run
 ## Especificações técnicas:
 Para essa implementação será utilizadas as ferramentas:
 * Gradle
-* PostgreSQL
-* Javalin
 
 ## Roadmap:
 - [x] preparar ambiente Gradle.
-- [ ] definir ecossistema de ferramentas.
+- [x] definir ecossistema de ferramentas.
 - [ ] implementação do controle de dados e regra de negócio.
 - [ ] implementação da visão.
 - [ ] implementação da persistência dos dados.
