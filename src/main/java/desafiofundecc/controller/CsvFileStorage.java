@@ -22,6 +22,20 @@ public class CsvFileStorage<T extends CsvStringable<T>> implements StorageHandle
         csvCollection = new ArrayList<String[]>();
     }
 
+    private CsvFileStorage(String path, List<T> collection, List<String[]> csvCollection) {
+        this.path = path;
+        this.collection = new ArrayList<T>(collection);
+        this.csvCollection = new ArrayList<String[]>(csvCollection);
+    }
+
+    public CsvFileStorage<T> addCollection(List<T> collection) {
+        return new CsvFileStorage<T>(this.path, collection, this.csvCollection);
+    }
+
+    public List<String[]> getCsvCollection() {
+        return csvCollection;
+    }
+
     @Override
     public void read() throws IOException {
         ObjectInputStream inputStream = null;
