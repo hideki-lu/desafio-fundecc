@@ -6,3 +6,4 @@ bin/
 gradlew
 gradlew.bat
 .classpath
+/gradle
