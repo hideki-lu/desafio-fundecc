@@ -3,7 +3,11 @@ package desafiofundecc.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
+import desafiofundecc.controller.csvstorage.CsvFileStorage;
+import desafiofundecc.controller.storageinterfaces.StorageKind;
 import desafiofundecc.model.Usuario;
 
 public final class UsuarioController {
@@ -20,8 +24,13 @@ public final class UsuarioController {
     public void addUsuario(Usuario usuario) {
         usuarios.add(usuario);
     }
+
+    public List<Usuario> getAllUsuarios() {
+        return usuarios;
+    }
     private UsuarioController() {
         usuarios = new ArrayList<Usuario>();
+
         storageKind = StorageKind.CSV_FILE_STORAGE;
     }
     public void storeUsuarios() {
@@ -29,6 +38,15 @@ public final class UsuarioController {
             case CSV_FILE_STORAGE: { csvStorageBehaviour(); break; }
             default: defaultBehavior();
         }
+    }
+
+    public List<Usuario> loadUsuariosList() {
+        return new CsvFileStorage<Usuario>("./usuarios.csv")
+                    .loadCSVRecords()
+                    .getCsvCollection()
+                    .stream()
+                    .map((csvRecord) -> { return Usuario.fromCVSToUsuario(csvRecord); })
+                    .collect(Collectors.toList());
     }
     private void defaultBehavior() {
         csvStorageBehaviour();

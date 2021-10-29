@@ -1,6 +1,6 @@
 package desafiofundecc.model;
 
-import desafiofundecc.controller.CsvStringable;
+import desafiofundecc.controller.csvstorage.CsvStringable;
 
 public final class Usuario extends Pessoa implements CsvStringable<Usuario> {
     private Cargo cargo;
@@ -18,7 +18,7 @@ public final class Usuario extends Pessoa implements CsvStringable<Usuario> {
                Sexo.sexoToChar(getSexo()) + "," +
                cargo.getName() + "\n";
     }
-    public Usuario fromCVSToUser(String[] record) {
+    public static Usuario fromCVSToUsuario(String[] record) {
         return new Usuario (
             record[0],
             record[1],

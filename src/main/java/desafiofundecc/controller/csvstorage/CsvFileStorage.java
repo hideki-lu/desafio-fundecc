@@ -1,4 +1,4 @@
-package desafiofundecc.controller;
+package desafiofundecc.controller.csvstorage;
 
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -11,6 +11,8 @@ import java.util.List;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+
+import desafiofundecc.controller.storageinterfaces.StorageHandler;
 
 public class CsvFileStorage<T extends CsvStringable<T>> implements StorageHandler<T> {
     private String path;
@@ -32,6 +34,15 @@ public class CsvFileStorage<T extends CsvStringable<T>> implements StorageHandle
         return new CsvFileStorage<T>(this.path, collection, this.csvCollection);
     }
 
+    public CsvFileStorage<T> loadCSVRecords() {
+        try { read();
+              return new CsvFileStorage<T>(this.path, this.collection, this.csvCollection); }
+        catch (IOException exception)  {
+                System.err.println("A error ocurred on try to load file: " 
+                                   + path + "\n" + exception.getMessage()); 
+                return new CsvFileStorage<T>(this.path, this.collection, this.csvCollection);
+        }
+    }
     public List<String[]> getCsvCollection() {
         return csvCollection;
     }
@@ -50,8 +61,8 @@ public class CsvFileStorage<T extends CsvStringable<T>> implements StorageHandle
             throw new IOException("Error while reading the data.");
         } finally {
             if (inputStream != null) {
-                try { inputStream.close(); 
-                } catch(IOException exception) 
+                try { inputStream.close(); } 
+                catch (IOException exception) 
                     { throw new IOException("Error while closing file.");}
             }
         }
