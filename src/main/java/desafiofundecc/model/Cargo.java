@@ -1,6 +1,8 @@
 package desafiofundecc.model;
 
-public final class Cargo {
+import desafiofundecc.controller.csvstorage.CsvStringable;
+
+public final class Cargo implements CsvStringable<Cargo>{
     private String name;
     
     public Cargo (String name) {
@@ -9,5 +11,14 @@ public final class Cargo {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toCsvString() {
+        return name;
+    }
+
+    public static Cargo fromCSVToCargo(String[] csvRecord) {
+        return new Cargo(csvRecord[0]);
     }
 }

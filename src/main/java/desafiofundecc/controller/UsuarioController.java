@@ -1,9 +1,7 @@
 package desafiofundecc.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import desafiofundecc.controller.csvstorage.CsvFileStorage;
@@ -29,8 +27,7 @@ public final class UsuarioController {
         return usuarios;
     }
     private UsuarioController() {
-        usuarios = new ArrayList<Usuario>();
-
+        usuarios = loadUsuariosList();
         storageKind = StorageKind.CSV_FILE_STORAGE;
     }
     public void storeUsuarios() {
@@ -40,7 +37,7 @@ public final class UsuarioController {
         }
     }
 
-    public List<Usuario> loadUsuariosList() {
+    private List<Usuario> loadUsuariosList() {
         return new CsvFileStorage<Usuario>("./usuarios.csv")
                     .loadCSVRecords()
                     .getCsvCollection()
