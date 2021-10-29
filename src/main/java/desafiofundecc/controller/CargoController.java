@@ -12,9 +12,11 @@ import desafiofundecc.model.Cargo;
 public final class CargoController {
     private List<Cargo> cargos;
     private StorageKind storageKind;
-    private CargoController instance;
+    private static CargoController instance = null;
 
     private CargoController() {
+        instance = null;
+        storageKind = StorageKind.CSV_FILE_STORAGE;
         cargos = new CsvFileStorage<Cargo>("./cargos.csv")
                         .loadCSVRecords()
                         .getCsvCollection()

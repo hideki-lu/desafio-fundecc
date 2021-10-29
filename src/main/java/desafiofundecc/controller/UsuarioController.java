@@ -11,7 +11,7 @@ import desafiofundecc.model.Usuario;
 public final class UsuarioController {
     private List<Usuario> usuarios;
     private StorageKind storageKind;
-    private UsuarioController instance;
+    private static UsuarioController instance = null;
     public UsuarioController getInstance() {
         if (instance == null) { 
             instance = new UsuarioController();
@@ -27,6 +27,7 @@ public final class UsuarioController {
         return usuarios;
     }
     private UsuarioController() {
+        instance = null;
         usuarios = loadUsuariosList();
         storageKind = StorageKind.CSV_FILE_STORAGE;
     }
