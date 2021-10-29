@@ -20,7 +20,7 @@ public final class CargoController {
     }
 
     public List<Cargo> getAllCargos() { cargos.sort(new Comparator<Cargo>() {
-        public int compare(Cargo um, Cargo outr) { return um.getName().compareTo(outr.getName()); };});
+        public int compare(Cargo um, Cargo outr) { return um.getNome().compareTo(outr.getNome()); };});
         return cargos;
     }
 }

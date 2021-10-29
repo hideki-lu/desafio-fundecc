@@ -16,7 +16,7 @@ public final class Usuario extends Pessoa implements CsvStringable<Usuario> {
                getDataNascimento() + "," +
                getCpf() + "," +
                Sexo.sexoToChar(getSexo()) + "," +
-               cargo.getName() + "\n";
+               cargo.getNome() + "\n";
     }
     public static Usuario fromCVSToUsuario(String[] record) {
         return new Usuario (
@@ -50,5 +50,10 @@ public final class Usuario extends Pessoa implements CsvStringable<Usuario> {
     @Override
     public Sexo getSexo() {
         return getSexo();
+    }
+
+    @Override
+    public String toString() {
+        return getNome();
     }
 }
